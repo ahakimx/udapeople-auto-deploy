@@ -148,9 +148,9 @@ jobs:
             npm i
             npm audit fix --audit-level=critical --force
         - slack/status:
-          channel: C01QYBBAH43
-          fail_only: true
-          webhook: $hook
+            channel: C01QYBBAH43
+            fail_only: true
+            webhook: $hook
 
   deploy-infrastructure:
     docker:
