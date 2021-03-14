@@ -147,10 +147,10 @@ jobs:
             cd backend
             npm i
             npm audit fix --audit-level=critical --force
-        - slack/status:
-            channel: C01QYBBAH43
-            fail_only: true
-            webhook: $hook
+      - slack/status:
+          channel: C01QYBBAH43
+          fail_only: true
+          webhook: $hook
 
   deploy-infrastructure:
     docker:
