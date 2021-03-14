@@ -53,6 +53,10 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - slack/status:
+          channel: C01QYBBAH43
+          fail_only: true
+          webhook: $hook
 
   build-backend:
     docker:
@@ -70,6 +74,10 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - slack/status:
+          channel: C01QYBBAH43
+          fail_only: true
+          webhook: $hook
 
   test-frontend:
     docker:
