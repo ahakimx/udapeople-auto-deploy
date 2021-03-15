@@ -132,7 +132,8 @@ jobs:
           command: |
             cd frontend
             npm i
-            npm audit --audit-level=critical
+            npm audit fix --audit-level=critical
+          no_output_timeout: 30m
       - slack/status:
           channel: C01QYBBAH43
           fail_only: true
