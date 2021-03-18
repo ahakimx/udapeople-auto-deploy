@@ -79,87 +79,87 @@ jobs:
           fail_only: true
           webhook: $hook
 
-  test-frontend:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      # Checkout code from git
-      - checkout
+  # test-frontend:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     # Checkout code from git
+  #     - checkout
 
-      # Restore from cache
-      - restore_cache:
-          keys: [frontend-build] 
+  #     # Restore from cache
+  #     - restore_cache:
+  #         keys: [frontend-build] 
 
-      # Your job code here
-      - run:
-          name: Run frontend test
-          command: |
-            cd frontend
-            npm i
-            npm run test
+  #     # Your job code here
+  #     - run:
+  #         name: Run frontend test
+  #         command: |
+  #           cd frontend
+  #           npm i
+  #           npm run test
                 
-  test-backend:
-    docker:
-      # Docker image here
-      - image: circleci/node:13.8.0
-    steps:
-      # Checkout code from git
-      - checkout
-      # Restore from cache
-      - restore_cache:
-          keys: [backend-build]
-      # Your job code here
-      - run:
-          name: run backend test
-          command: |
-            cd backend
-            npm i
-            npm run test
+  # test-backend:
+  #   docker:
+  #     # Docker image here
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     # Checkout code from git
+  #     - checkout
+  #     # Restore from cache
+  #     - restore_cache:
+  #         keys: [backend-build]
+  #     # Your job code here
+  #     - run:
+  #         name: run backend test
+  #         command: |
+  #           cd backend
+  #           npm i
+  #           npm run test
 
-  scan-frontend:
-    docker:
-      # Docker image here
-      - image: circleci/node:13.8.0
-    steps:
-      # Checkout code from git
-      - checkout
-      # Restore from cache 
-      - restore_cache:
-          keys: [frontend-build]
-      # Your job code here
-      - run:
-          name: run frontend scan
-          command: |
-            cd frontend
-            npm i
-            npm audit fix --audit-level=critical
-          no_output_timeout: 30m
-      - slack/status:
-          channel: C01QYBBAH43
-          fail_only: true
-          webhook: $hook
+  # scan-frontend:
+  #   docker:
+  #     # Docker image here
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     # Checkout code from git
+  #     - checkout
+  #     # Restore from cache 
+  #     - restore_cache:
+  #         keys: [frontend-build]
+  #     # Your job code here
+  #     - run:
+  #         name: run frontend scan
+  #         command: |
+  #           cd frontend
+  #           npm i
+  #           npm audit fix --audit-level=critical
+  #         no_output_timeout: 30m
+  #     - slack/status:
+  #         channel: C01QYBBAH43
+  #         fail_only: true
+  #         webhook: $hook
 
-  scan-backend:
-    docker:
-      # Docker image here
-      - image: circleci/node:13.8.0
-    steps:
-      # Checkout code from git
-      - checkout
-      # Restore from cache 
-      - restore_cache:
-          keys: [backend-build]
-      # Your job code here
-      - run:
-          name: run backend scan
-          command: |
-            cd backend
-            npm i
-            npm audit fix --audit-level=critical --force
-      - slack/status:
-          channel: C01QYBBAH43
-          fail_only: true
-          webhook: $hook
+  # scan-backend:
+  #   docker:
+  #     # Docker image here
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     # Checkout code from git
+  #     - checkout
+  #     # Restore from cache 
+  #     - restore_cache:
+  #         keys: [backend-build]
+  #     # Your job code here
+  #     - run:
+  #         name: run backend scan
+  #         command: |
+  #           cd backend
+  #           npm i
+  #           npm audit fix --audit-level=critical --force
+  #     - slack/status:
+  #         channel: C01QYBBAH43
+  #         fail_only: true
+  #         webhook: $hook
 
   deploy-infrastructure:
     docker:
