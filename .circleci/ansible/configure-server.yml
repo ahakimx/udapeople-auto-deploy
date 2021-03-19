@@ -10,7 +10,7 @@
     - ansible_stdout_callback: yaml
 
 
-    environment:
+      environment:
           TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
           TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
           TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
