@@ -211,8 +211,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints:
-            - ["b4:ea:26:79:95:c5:a4:e2:6e:ca:5d:ff:63:94:60:a6"]
+          fingerprints: ["b4:ea:26:79:95:c5:a4:e2:6e:ca:5d:ff:63:94:60:a6"]
       - attach_workspace:
           at: .circleci/ansible/
       - run:
