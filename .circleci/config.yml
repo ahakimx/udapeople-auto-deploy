@@ -176,7 +176,7 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=udapeople \
+              --tags project=udapeople-be-${CIRCLE_WORKFLOW_ID:0:7} \
               --stack-name "udapeople-be-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
@@ -184,18 +184,19 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project=udapeople \
-              --stack-name "udapeople-fe-${CIRCLE_WORKFLOW_ID}" \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID}"  
+              --tags project=udapeople-fe-${CIRCLE_WORKFLOW_ID:0:7} \
+              --stack-name "udapeople-fe-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --output text >> ~/.circleci/ansible/inventory.txt
-          #cat .circleci/ansible/inventory.txt
+              --filters Name=tag:project,Value=udapeople-be-${CIRCLE_WORKFLOW_ID:0:7} \
+              --output text >> ./.circleci/ansible/inventory.txt
+          cat ./.circleci/ansible/inventory.txt
       - persist_to_workspace:
-          root: ~/.circleci/ansible/
+          root: .circleci/ansible/
           paths:
             - inventory.txt
       # Here's where you will add some code to rollback on failure     
