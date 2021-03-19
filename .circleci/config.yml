@@ -237,7 +237,7 @@ jobs:
           name: Install dependencies
           command: |
             sudo apt-get update
-            sudo apt-get -y awscli
+           # sudo apt-get -y awscli
       - run:
           name: Run migrations
           command: |
@@ -255,7 +255,7 @@ jobs:
             curl -H "Content-Type: text/plain" -H "token: ${CIRCLE_WORKFLOW_ID}" --request PUT --data "0" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID}
             fi
      # Here's where you will add some code to rollback on failure
-      - destroy-environment      
+     # - destroy-environment      
 
   deploy-frontend:
     docker:
