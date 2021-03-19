@@ -97,6 +97,7 @@ jobs:
             cd frontend
             npm i
             npm run test
+          no_output_timeout: 30m
                 
   test-backend:
     docker:
