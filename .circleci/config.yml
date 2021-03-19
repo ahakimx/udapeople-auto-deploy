@@ -212,13 +212,14 @@ jobs:
       # Add ssh keys with fingerprint
       - add_ssh_keys:
           fingerprints:
-            - "b4:ea:26:79:95:c5:a4:e2:6e:ca:5d:ff:63:94:60:a6"
+            - ["b4:ea:26:79:95:c5:a4:e2:6e:ca:5d:ff:63:94:60:a6"]
       - attach_workspace:
           at: .circleci/ansible/
       - run:
           name: Install dependencies
           command: |
             apk add --update ansible
+            pip install awscli
       - run:
           name: Configure server
           command: |
