@@ -28,8 +28,8 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = $(curl -H "Content-Type: text/plain" -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
-            if(( $SUCCESS==0 )); 
+            SUCCESS=$(curl -H "Content-Type: text/plain" -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            if(( $SUCCESS==1 )); 
             then
               cd ~/project/backend
               npm install
@@ -296,7 +296,7 @@ jobs:
             cd frontend
             npm i
             npm run build
-            aws s3 sync frontend/dist "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive 
+            aws s3 sync frontend/dist s3://udapeople-"${CIRCLE_WORKFLOW_ID:0:7}" --recursive 
       # Here's where you will add some code to rollback on failure 
       - destroy-environment     
       - revert-migrations
