@@ -211,7 +211,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints: ["b4:ea:26:79:95:c5:a4:e2:6e:ca:5d:ff:63:94:60:a6"]
+          fingerprints: ["1c:d3:72:de:8a:c3:b4:84:bd:3a:ba:ef:6d:89:6f:aa"]
       - attach_workspace:
           at: .circleci/ansible/
       - run:
@@ -232,7 +232,6 @@ jobs:
             echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS > "backend/.env"
             echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR > "backend/.env"
             echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES > "backend/.env"
-            echo $ENVIRONMENT
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       # Here's where you will add some code to rollback on failure
       - destroy-environment      
