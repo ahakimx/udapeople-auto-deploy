@@ -1,11 +1,12 @@
-
+---
 - name: Creates directory
   file:
     path: /home/ubuntu/backend
     state: directory
+
 - name: "move backend files to server."
   copy:
-    src: /root/project/backend
+    src: /root/circleci/project/backend
     dest: /home/ubuntu
 
 - name: "install package dependencies"
