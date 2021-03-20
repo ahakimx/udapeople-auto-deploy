@@ -232,7 +232,7 @@ jobs:
             echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS > "backend/.env"
             echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR > "backend/.env"
             echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES > "backend/.env"
-            cat $ENVIRONMENT
+            echo $ENVIRONMENT
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       # Here's where you will add some code to rollback on failure
       - destroy-environment      
