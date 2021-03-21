@@ -296,8 +296,8 @@ jobs:
             cd dist
             aws s3 sync . "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive 
       # Here's where you will add some code to rollback on failure 
-      - destroy-environment     
-      - revert-migrations
+      # - destroy-environment     
+      # - revert-migrations
                     
   deploy-backend:
     docker:
@@ -323,8 +323,8 @@ jobs:
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
             
       # Here's where you will add some code to rollback on failure  
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
 
   smoke-test:
     docker:
