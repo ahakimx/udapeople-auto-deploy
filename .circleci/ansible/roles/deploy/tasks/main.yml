@@ -6,20 +6,16 @@
 
 - name: "move backend files to server."
   copy:
-    src: dist/
+    src: backend.tar.gz
     dest: /home/ubuntu/backend
 
 - name: "install package dependencies"
   shell: |
     cd /home/ubuntu/backend
+    tar xzvf backend.tar.gz
     npm install
     
-- name: "build package"
-  shell: |
-    cd /home/ubuntu/backend
-    npm run build
-    
-- name: Executing node
+- name: Run app
   become: true
   shell: |
     cd /home/ubuntu/backend 
