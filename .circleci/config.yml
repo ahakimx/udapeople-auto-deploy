@@ -335,15 +335,6 @@ jobs:
             echo "--- list dist files ---"
             ls ./dist
 
-          # echo "---- compress dist folder -----"
-          # tar -czvf backend.tar.gz ./dist/*
-
-          # echo "---- copy file to ansible folder ----"
-          # cp backend.tar.gz ~/project/.circleci/ansible/roles/deploy/files
-
-          # echo "---- list file ------"
-          # ls -la ~/project/.circleci/ansible/roles/deploy/files
-
             echo "---- change dir ------"
             cd ~/project/.circleci/ansible/
 
