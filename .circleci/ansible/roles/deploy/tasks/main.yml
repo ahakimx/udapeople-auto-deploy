@@ -7,12 +7,12 @@
 - name: "move backend files to server."
   copy:
     src: dist/
-    dest: /home/ubuntu
+    dest: /home/ubuntu/backend
 
 - name: "install package dependencies"
   shell: |
-    cd /home/ubuntu/backend    
-    npm install 
+    cd /home/ubuntu/backend
+    npm install
     
 - name: "build package"
   shell: |
