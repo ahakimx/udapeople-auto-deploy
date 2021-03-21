@@ -320,19 +320,30 @@ jobs:
             pip install awscli
       - run:
           name: Deploy backend
-          #no_output_timeout: 30m
+          no_output_timeout: 30m
           command: |
+            echo "--- change dir to backend ----"
             cd backend
+            echo "---- install dependency ----"
             npm i
+            echo "--- build backend ---"
             npm run build
+            echo "--- list files ---"
             ls dist
+
             echo "---- compress dist folder -----"
             tar -czvf backend.tar.gz ./dist/*
+
+            echo "---- copy file to ansible folder ----"
             cp backend.tar.gz ~/project/.circleci/ansible/roles/deploy/files
-            echo "----------"
+
+            echo "---- list file ------"
             ls -la ~/project/.circleci/ansible/roles/deploy/files
-            echo "----------"
+
+            echo "---- change dir ------"
             cd ~/project/.circleci/ansible/
+
+            echo "--- run playbook ---"
             ansible-playbook -i inventory.txt deploy-backend.yml
             
       # Here's where you will add some code to rollback on failure  
