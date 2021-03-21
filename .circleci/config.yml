@@ -320,6 +320,7 @@ jobs:
             pip install awscli
       - run:
           name: Deploy backend
+          no_output_timeout: 30m
           command: |
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
             
