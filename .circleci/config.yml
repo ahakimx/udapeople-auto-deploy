@@ -327,12 +327,12 @@ jobs:
             npm run build
             ls dist
             cp -r dist/ ~/project/.circleci/ansible/roles/deploy/files
-            cd ..
+            cd ~/project/.circleci/ansible/
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
             
       # Here's where you will add some code to rollback on failure  
-      # - destroy-environment
-      # - revert-migrations
+      - destroy-environment
+      - revert-migrations
 
   smoke-test:
     docker:
