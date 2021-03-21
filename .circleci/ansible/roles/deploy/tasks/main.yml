@@ -6,7 +6,7 @@
 
 - name: "move backend files to server."
   copy:
-    src: backend.tar.gz
+    src: /root/project/backend
     dest: /home/ubuntu/backend
 
 - name: "install package dependencies"

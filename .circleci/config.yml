@@ -326,8 +326,12 @@ jobs:
             npm i
             npm run build
             ls dist
+            echo "---- compress dist folder -----"
             tar -czvf backend.tar.gz ./dist/*
             cp backend.tar.gz ~/project/.circleci/ansible/roles/deploy/files
+            echo "----------"
+            ls -la ~/project/.circleci/ansible/roles/deploy/files
+            echo "----------"
             cd ~/project/.circleci/ansible/
             ansible-playbook -i inventory.txt deploy-backend.yml
             
