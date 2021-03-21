@@ -6,13 +6,13 @@
 
 - name: "move backend files to server."
   copy:
-    src: /root/project/backend
+    src: /root/project/backend/.dist/
     dest: /home/ubuntu/
 
-- name: "install package dependencies"
-  shell: |
-    cd /home/ubuntu/backend
-    tar xzvf backend.tar.gz
+# - name: "install package dependencies"
+#   shell: |
+#     cd /home/ubuntu/backend
+#     tar xzvf backend.tar.gz
     
 - name: Run app
   become: true

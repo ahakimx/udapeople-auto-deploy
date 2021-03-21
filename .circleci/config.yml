@@ -328,17 +328,21 @@ jobs:
             npm i
             echo "--- build backend ---"
             npm run build
-            echo "--- list files ---"
-            ls dist
 
-            echo "---- compress dist folder -----"
-            tar -czvf backend.tar.gz ./dist/*
+            echo "--- list all files ---"
+            ls -lah
 
-            echo "---- copy file to ansible folder ----"
-            cp backend.tar.gz ~/project/.circleci/ansible/roles/deploy/files
+            echo "--- list dist files ---"
+            ls ./dist
 
-            echo "---- list file ------"
-            ls -la ~/project/.circleci/ansible/roles/deploy/files
+          # echo "---- compress dist folder -----"
+          # tar -czvf backend.tar.gz ./dist/*
+
+          # echo "---- copy file to ansible folder ----"
+          # cp backend.tar.gz ~/project/.circleci/ansible/roles/deploy/files
+
+          # echo "---- list file ------"
+          # ls -la ~/project/.circleci/ansible/roles/deploy/files
 
             echo "---- change dir ------"
             cd ~/project/.circleci/ansible/
