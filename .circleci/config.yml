@@ -320,8 +320,14 @@ jobs:
             pip install awscli
       - run:
           name: Deploy backend
-          no_output_timeout: 30m
+          #no_output_timeout: 30m
           command: |
+            cd backend
+            cat .env
+            npm i
+            npm run build
+            ls dist
+            cp -r dist/ ~/project/.circleci/ansible/roles/deploy/files
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
             
       # Here's where you will add some code to rollback on failure  
