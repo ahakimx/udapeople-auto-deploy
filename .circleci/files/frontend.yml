@@ -25,10 +25,10 @@ Resources:
         - Sid: PublicReadForGetBucketObjects
           Effect: Allow
           Principal: '*'
-          Action: s3:GetObject
+          Action: S3:GetObject
           Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
 
 Outputs:
   WebsiteURL:
     Value: !GetAtt WebsiteBucket.WebsiteURL
-    Description: URL for website hosted on S3
+    Description: URL for website hosted on S3 
