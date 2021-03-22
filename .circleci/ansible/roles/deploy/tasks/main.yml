@@ -12,7 +12,7 @@
 - name: "Install package dependencies"
   shell: |
     cd /home/ubuntu/backend
-    tar xzvf backend.tar.gz .
+    tar xzvf backend.tar.gz
     
 - name: Run the backend app
   become: true
