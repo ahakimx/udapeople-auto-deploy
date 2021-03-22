@@ -330,16 +330,16 @@ jobs:
             npm run build
 
             echo "--- save env variable ---"
-            echo ENVIRONMENT=$ENVIRONMENT > "/root/project/backend/.env"
-            echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION > "/root/project/backend/.env"
-            echo TYPEORM_HOST=$TYPEORM_HOST > "/root/project/backend/.env"
-            echo TYPEORM_PORT=$TYPEORM_PORT > "/root/project/backend/.env"
-            echo TYPEORM_USERNAME=$TYPEORM_USERNAME > "/root/project/backend/.env"
-            echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD > "/root/project/backend/.env"
-            echo TYPEORM_DATABASE=$TYPEORM_DATABASE > "/root/project/backend/.env"
-            echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS > "/root/project/backend/.env"
-            echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR > "/root/project/backend/.env"
-            echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES > "/root/project/backend/.env"
+            echo ENVIRONMENT=$ENVIRONMENT >> "/root/project/backend/.env"
+            echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> "/root/project/backend/.env"
+            echo TYPEORM_HOST=$TYPEORM_HOST >> "/root/project/backend/.env"
+            echo TYPEORM_PORT=$TYPEORM_PORT >> "/root/project/backend/.env"
+            echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "/root/project/backend/.env"
+            echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "/root/project/backend/.env"
+            echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "/root/project/backend/.env"
+            echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS >> "/root/project/backend/.env"
+            echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> "/root/project/backend/.env"
+            echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES >> "/root/project/backend/.env"
 
             echo "--- list all files ---"
             ls -lah
