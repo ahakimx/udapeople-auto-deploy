@@ -375,18 +375,21 @@ jobs:
       - run:
           name: Get backend url
           command: |
-            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters Name=tag:project,Values=udapeople-be-${CIRCLE_WORKFLOW_ID:0:7} --output text)
             export API_URL="http://${BACKEND_IP}:3030/api/status"
+            echo "${API_URL}"
       - run:
           name: Backend smoke test.
           command: |
+            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters Name=tag:project,Values=udapeople-be-${CIRCLE_WORKFLOW_ID:0:7} --output text)
+            export API_URL="http://${BACKEND_IP}:3030/api/status"
             echo "${API_URL}"
             curl ${API_URL}
 
       - run:
           name: Frontend smoke test.
           command: |
-            URL="http://udapeople-${CIRCLE_WORKFLOW_ID}.s3-website-us-east-1.amazonaws.com"
+            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-east-1.amazonaws.com"
             if curl -s ${URL} | grep "Welcome"
             then
             return 1
@@ -396,8 +399,8 @@ jobs:
 
       # Here's where you will add some code to rollback on failure  
 
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
 
   cloudfront-update:
     docker:
