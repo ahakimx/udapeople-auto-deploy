@@ -347,6 +347,9 @@ jobs:
             echo "--- list dist files ---"
             ls ./dist
 
+            echo "--- compress backend file ---"
+            tar -czvf backend.tar.gz .
+
             echo "---- change dir ------"
             cd ~/project/.circleci/ansible/
 
