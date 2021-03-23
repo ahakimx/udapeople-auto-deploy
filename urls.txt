@@ -6,4 +6,4 @@ https://github.com/ahakimx/udapeople-auto-deploy [URL01]
 
 [URL04]
 
-[URL05]
+http://ec2-34-212-15-184.us-west-2.compute.amazonaws.com:9090/graph [URL05]
