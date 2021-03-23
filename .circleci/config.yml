@@ -429,7 +429,7 @@ jobs:
 
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
-            --stack-name ha-udapeople \
+            --stack-name udapeople-cloudfront \
             --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}"
 
       # Here's where you will add some code to rollback on failure  
@@ -458,6 +458,8 @@ jobs:
             #put the list of stacks here
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+            echo $OldWorkflowID
+            echo $STACKS
       - run:
           name: Remove old stacks and files
           command: |
@@ -468,7 +470,7 @@ jobs:
             #put the list of stacks here
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-                  
+
             echo $OldWorkflowID
             echo $STACKS
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
