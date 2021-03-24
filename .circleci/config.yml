@@ -463,8 +463,8 @@ jobs:
       - run:
           name: Get old stack workflow id
           command: |
-            echo OldWorkflow ID: $(cat oldworkflowid.txt)
-            echo Old Stacks: $(cat oldstack.txt)
+            echo OldWorkflow ID: $(cat .circleci/files/oldworkflowid.txt)
+            echo Old Stacks: $(cat .circleci/files/oldstack.txt)
 
             export OldWorkflowID=$(aws cloudformation \
                   list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
@@ -478,8 +478,8 @@ jobs:
       - run:
           name: Remove old stacks and files
           command: |
-            export OldWorkflowID=$(cat oldworkflowid.txt)
-            export STACKS=$(cat oldstack.txt)
+            export OldWorkflowID=$(cat .circleci/files/oldworkflowid.txt)
+            export STACKS=$(cat .circleci/files/oldstack.txt)
 
             echo $OldWorkflowID
             echo $STACKS
