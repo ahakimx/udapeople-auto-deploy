@@ -425,8 +425,8 @@ jobs:
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
 
-            echo OldWorkflow ID: "$OldWorkflowID" > oldworkflowid.txt
-            echo Old stacks ID: "$STACKS" >> oldstack.txt
+            echo OldWorkflow ID: "$OldWorkflowID" > ./.circleci/oldworkflowid.txt
+            echo Old stacks ID: "$STACKS" >> ./.circleci/oldstack.txt
 
             echo OldWorkflow ID: "$OldWorkflowID"
             echo Old stacks ID: "$STACKS"
@@ -437,10 +437,10 @@ jobs:
             --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}"
 
       - persist_to_workspace:
-          root: .circleci/files/
+          root: ~/
           paths:
-            - oldworkflowid.txt
-            - oldstack.txt
+            - project/.circleci/oldworkflowid.txt
+            - project/.circleci/oldstack.txt
 
       # Here's where you will add some code to rollback on failure  
       - destroy-environment
@@ -463,8 +463,8 @@ jobs:
       - run:
           name: Get old stack workflow id
           command: |
-            echo OldWorkflow ID: $(cat .circleci/files/oldworkflowid.txt)
-            echo Old Stacks: $(cat .circleci/files/oldstack.txt)
+            echo OldWorkflow ID: $(cat ./.circleci/files/oldworkflowid.txt)
+            echo Old Stacks: $(cat ./.circleci/files/oldstack.txt)
 
             export OldWorkflowID=$(aws cloudformation \
                   list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
