@@ -425,12 +425,22 @@ jobs:
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
 
+            echo OldWorkflow ID: "$OldWorkflowID" > oldworkflowid.txt
+            echo Old stacks ID: "$STACKS" >> oldstack.txt
+
             echo OldWorkflow ID: "$OldWorkflowID"
+            echo Old stacks ID: "$STACKS"
 
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
             --stack-name udapeople-cloudfront \
             --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}"
+
+      - persist_to_workspace:
+          root: .circleci/files/
+          paths:
+            - oldworkflowid.txt
+            - oldstack.txt
 
       # Here's where you will add some code to rollback on failure  
       - destroy-environment
@@ -448,9 +458,14 @@ jobs:
           command: |
             yum install -y tar
             yum install -y gzip
+      - attach_workspace:
+          at: .circleci/files/
       - run:
           name: Get old stack workflow id
           command: |
+            echo OldWorkflow ID: $(cat oldworkflowid.txt)
+            echo Old Stacks: $(cat oldstack.txt)
+
             export OldWorkflowID=$(aws cloudformation \
                   list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                   --no-paginate --output text)
@@ -458,21 +473,17 @@ jobs:
             #put the list of stacks here
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-            echo $OldWorkflowID
-            echo $STACKS
+            echo NewWorkflow ID: $OldWorkflowID
+            echo new Stacks: $STACKS
       - run:
           name: Remove old stacks and files
           command: |
-            export OldWorkflowID=$(aws cloudformation \
-                  list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-                  --no-paginate --output text)
-
-            #put the list of stacks here
-            export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-                  --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+            export OldWorkflowID=$(cat oldworkflowid.txt)
+            export STACKS=$(cat oldstack.txt)
 
             echo $OldWorkflowID
             echo $STACKS
+
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
