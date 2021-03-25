@@ -440,7 +440,7 @@ jobs:
           root: ~/
           paths:
             - oldworkflowid.txt
-            - circleci/oldstack.txt
+            - oldstack.txt
 
       # Here's where you will add some code to rollback on failure  
       - destroy-environment
