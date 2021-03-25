@@ -420,13 +420,16 @@ jobs:
           command: |
             export OldWorkflowID=$(aws cloudformation \
                   list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-                  --no-paginate --output text) > ~/oldworkflowid.txt
+                  --no-paginate --output text) 
 
-            export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-                  --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) >> ~/oldstack.txt
+            export STACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
+                  --stack-status-filter CREATE_COMPLETE --no-paginate --output text)
 
             echo OldWorkflow ID: "$OldWorkflowID"
             echo Old stacks ID: "$STACKS"
+
+            echo $OldWorkflowID > ~/oldworkflowid.txt
+            echo $STACKS  >> ~/oldstack.txt
 
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
@@ -468,8 +471,8 @@ jobs:
                   --no-paginate --output text)
 
             #put the list of stacks here
-            export NEWSTACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-                  --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+            export NEWSTACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
+                  --stack-status-filter CREATE_COMPLETE --no-paginate --output text)
             echo NewWorkflow ID: $NewWorkflowID
             echo new Stacks: $NEWSTACKS
       - run:
