@@ -425,8 +425,8 @@ jobs:
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
 
-            echo OldWorkflow ID: "$OldWorkflowID" > ./.circleci/oldworkflowid.txt
-            echo Old stacks ID: "$STACKS" >> ./.circleci/oldstack.txt
+            echo OldWorkflow ID: "$OldWorkflowID" > ~/oldworkflowid.txt
+            echo Old stacks ID: "$STACKS" >> ~/oldstack.txt
 
             echo OldWorkflow ID: "$OldWorkflowID"
             echo Old stacks ID: "$STACKS"
@@ -439,8 +439,8 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/oldworkflowid.txt
-            - project/.circleci/oldstack.txt
+            - oldworkflowid.txt
+            - circleci/oldstack.txt
 
       # Here's where you will add some code to rollback on failure  
       - destroy-environment
@@ -459,27 +459,27 @@ jobs:
             yum install -y tar
             yum install -y gzip
       - attach_workspace:
-          at: .circleci/files/
+          at: ~/
       - run:
           name: Get old stack workflow id
           command: |
-            echo OldWorkflow ID: $(cat ./.circleci/files/oldworkflowid.txt)
-            echo Old Stacks: $(cat ./.circleci/files/oldstack.txt)
+            echo OldWorkflow ID: $(cat ~/oldworkflowid.txt)
+            echo Old Stacks: $(cat ~/oldstack.txt)
 
-            export OldWorkflowID=$(aws cloudformation \
+            export NewWorkflowID=$(aws cloudformation \
                   list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                   --no-paginate --output text)
 
             #put the list of stacks here
-            export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
+            export NEWSTACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-            echo NewWorkflow ID: $OldWorkflowID
-            echo new Stacks: $STACKS
+            echo NewWorkflow ID: $NewWorkflowID
+            echo new Stacks: $NEWSTACKS
       - run:
           name: Remove old stacks and files
           command: |
-            export OldWorkflowID=$(cat .circleci/files/oldworkflowid.txt)
-            export STACKS=$(cat .circleci/files/oldstack.txt)
+            export OldWorkflowID=$(cat ~/oldworkflowid.txt)
+            export STACKS=$(cat ~/oldstack.txt)
 
             echo $OldWorkflowID
             echo $STACKS
