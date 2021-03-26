@@ -1,9 +1,9 @@
 https://github.com/ahakimx/udapeople-auto-deploy [URL01]
 
-http://udapeople-67e7b9a.s3-website-us-west-2.amazonaws.com/ [URL02]
+http://udapeople-3a9b2d4.s3-website-us-west-2.amazonaws.com/ [URL02]
 
 d2vd2g8t06if7b.cloudfront.net [URL03]
 
-http://34.219.241.47:3030/api/status [URL04]
+http://34.220.63.160:3030/api/status [URL04]
 
 http://ec2-54-202-68-21.us-west-2.compute.amazonaws.com:9090 [URL05]
