@@ -224,6 +224,7 @@ jobs:
           name: Configure server
           command: |
             echo ENVIRONMENT=$ENVIRONMENT >> "backend/.env"
+            echo NODE_ENV=production >> "backend/.env"
             echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> "backend/.env"
             echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
             echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/.env"
@@ -334,6 +335,7 @@ jobs:
 
             echo "--- save env variable ---"
             echo ENVIRONMENT=$ENVIRONMENT >> "/root/project/backend/.env"
+            echo NODE_ENV=production >> "/root/project/backend/.env"
             echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> "/root/project/backend/.env"
             echo TYPEORM_HOST=$TYPEORM_HOST >> "/root/project/backend/.env"
             echo TYPEORM_PORT=$TYPEORM_PORT >> "/root/project/backend/.env"

@@ -1,6 +1,6 @@
 https://github.com/ahakimx/udapeople-auto-deploy [URL01]
 
-http://udapeople-8bc8bcc.s3-website-us-west-2.amazonaws.com/ [URL02]
+http://udapeople-67e7b9a.s3-website-us-west-2.amazonaws.com/ [URL02]
 
 d2vd2g8t06if7b.cloudfront.net [URL03]
 
